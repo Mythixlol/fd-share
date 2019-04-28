@@ -1,15 +1,15 @@
-#include <fcntl.h>
-#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <arpa/inet.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
 
-#define BUF 1024
 #define UDS_FILE "/tmp/sock.uds"
 
 void sendIt(int a, int b);
@@ -21,10 +21,7 @@ int main(void)
 
     int create_socket, new_socket;
     socklen_t addrlen;
-    char *buffer = (char *)malloc(BUF);
-    ssize_t size;
     struct sockaddr_un address;
-    const int y = 1;
     if ((create_socket = socket(AF_LOCAL, SOCK_STREAM, 0)) > 0)
         printf("Socket wurde angelegt\n");
     unlink(UDS_FILE);
