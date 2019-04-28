@@ -34,10 +34,12 @@ int main(int argc, char **argv)
     {
         fd = recFD(create_socket);
     }
-
+    
+    write (fd, "written \n", 17);
     printf("done\n");
 
     close(create_socket);
+    close(fd);
     return EXIT_SUCCESS;
 }
 
